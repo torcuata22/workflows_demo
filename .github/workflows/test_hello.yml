@@ -1,0 +1,31 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Hello Test Python Versions
+
+on: push
+
+ hello-test-python-versions:
+  strategy:
+    matrix:
+      python-versions: ['3.6, '3.7', '3.8']
+  runs-on: ubuntu-latest
+  steps:
+  
+  #Runs a single command using the runners shell, using run: |
+  -run: |
+    echo "Job running on a ${{ runner.os }} sever hosted by GitHub."
+    echo "On branch ${{ github.ref }} of repository ${{ github.repository }}."
+  -name: Check out repository code so it can be run by GitHub
+  uses: actions/checkout@v2
+  
+  -run: echo "The ${{github.repository}} reposiroty has been closned to the runner."
+  
+  -name: List files in rpository
+   run: |
+      echo "The contents of the repository are:"
+      ls ${{ github.workspace }}
+  -name: Run Python code in helloworld.py
+   run: |
+      echo "Running Python code"
+      python helloworld.py
+  
